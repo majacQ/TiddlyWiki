@@ -1,5 +1,5 @@
 {
-  "version": "2.9.2",
+  "version": "2.10.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/TiddlyWiki/TiddlyWiki.git"
@@ -9,12 +9,18 @@
     "build-external-core": "node build/build_external_core.js",
     "build-site": "node build/build_site.js",
     "build-test": "node build/build_test.js",
+    "lint": "eslint --cache --ext .js ./js",
+    "lint:fix": "eslint --cache --ext .js ./js --fix",
+    "bump-version": "node build/bump_version.js",
     "test":       "echo 'not implemented yet, see build-test'",
     "build":      "echo 'not implemented yet'"
   },
-  "dependencies": {},
+  "dependencies": {
+    "jquery": "1.9.1"
+  },
   "devDependencies": {
+    "eslint": "^8.2.0",
     "phantomjs": "^2.1.7",
-    "tiddlywiki": "^5.1.21"
+    "tiddlywiki": "5.2.1"
   }
 }

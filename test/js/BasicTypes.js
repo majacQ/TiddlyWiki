@@ -1,30 +1,6 @@
 jQuery(document).ready(function() {
 	module("Basic Types");
 
-	test("Number clamp", function() {
-		var actual, expected;
-
-		actual = (99).clamp();
-		expected = 99;
-		same(actual, expected, "returns original number if no arguments are specified");
-
-		actual = (11).clamp(20);
-		expected = 20;
-		same(actual, expected, "if only one argument is specified, uses it as minimum");
-
-		actual = (55).clamp(20, 80);
-		expected = 55;
-		same(actual, expected, "returns original number if it is between minimum and maximum");
-
-		actual = (11).clamp(20, 80);
-		expected = 20;
-		same(actual, expected, "returns minimum if number is smaller than minimum");
-
-		actual = (99).clamp(20, 80);
-		expected = 80;
-		same(actual, expected, "returns maximum if number is greater than maximum");
-	});
-
 	test("Array indexOf", function() {
 		var actual, expected;
 
@@ -178,50 +154,6 @@ jQuery(document).ready(function() {
 		actual.remove({ bar: "ipsum" });
 		expected = [{ foo: "lorem" }, { bar: "ipsum" }];
 		same(actual, expected, "does not modify original array if given item is an object (deep comparison is not supported)"); // XXX: not actually desired!? -- cf. #606
-	});
-
-	test("Array setItem", function() {
-		var actual, expected;
-
-		actual = ["foo", "bar", "baz"];
-		actual.setItem();
-		expected = ["foo", "bar", "baz"];
-		same(actual, expected, "does not modify array if no arguments are specified");
-
-		actual = ["foo", "bar", "baz"];
-		actual.setItem("foo");
-		expected = ["foo", "bar", "baz"];
-		same(actual, expected, "does not modify original array if mode is not specified");
-
-		actual = ["foo", "bar"];
-		actual.setItem("baz", 0);
-		expected = ["foo", "bar", "baz"];
-		same(actual, expected, "appends given item to original array if mode is 0 and element is not present");
-
-		actual = ["foo", "bar", "baz"];
-		actual.setItem("bar", 0);
-		expected = ["foo", "baz"];
-		same(actual, expected, "removes given item from original array if mode 0 and element is present");
-
-		actual = ["foo", "bar"];
-		actual.setItem("baz", +1);
-		expected = ["foo", "bar", "baz"];
-		same(actual, expected, "appends given item to original array if mode is +1 and element is not present");
-
-		actual = ["foo", "bar"];
-		actual.setItem("bar", +1);
-		expected = ["foo", "bar"];
-		same(actual, expected, "does not modify original array if mode is +1 and element is present");
-
-		actual = ["foo", "bar", "baz"];
-		actual.setItem("bar", -1);
-		expected = ["foo", "baz"];
-		same(actual, expected, "removes given item from original array if mode is -1 and element is present");
-
-		actual = ["foo", "bar"];
-		actual.setItem("baz", -1);
-		expected = ["foo", "bar"];
-		same(actual, expected, "does not modify original array if mode is -1 and element is not present");
 	});
 
 	test("Array map", function() {

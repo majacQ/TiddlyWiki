@@ -4,18 +4,16 @@
 
 // Perform an http request using the jQuery ajax function
 // fallback to privileged file I/O or HTML5 FileReader
-function ajaxReq(args)
-{
+function ajaxReq(args) {
 	if (args.file || args.url.startsWith("file"))  // LOCAL FILE
 		return localAjax(args);
 	return jQuery.ajax(args);
 }
 
 // perform local I/O and FAKE a minimal XHR response object
-function localAjax(args)
-{
+function localAjax(args) {
 	var success = function(data) {
-		args.success(data, "success", { responseText:data });
+		args.success(data, "success", { responseText: data });
 	};
 	var failure = function(who) {
 		args.error({ message: who + ": cannot read local file" }, "error", 0);
@@ -23,13 +21,14 @@ function localAjax(args)
 
 	if (args.file) try { // HTML5 FileReader (Chrome, FF20+, Safari, etc.)
 		var reader = new FileReader();
-		reader.onload = function(e)  { success(e.target.result); }
-		reader.onerror = function(e) { failure("FileReader"); }
+		reader.onload = function(e)  { success(e.target.result) };
+		reader.onerror = function(e) { failure("FileReader") };
 		reader.readAsText(args.file);
 		return true;
 	} catch (ex) { ; }
 
-	try { // local file I/O (IE, FF with TiddlyFox, Chrome/Safari with TiddlySaver, etc.)
+	// local file I/O (IE, FF with security.fileuri.strict_origin_policy:false, etc.)
+	try {
 		var data = loadFile(getLocalPath(args.url));
 		if (data) success(data);
 		else failure("loadFile");
@@ -58,8 +57,7 @@ function localAjax(args)
 //     responseText - the text of the file
 //     url - requested URL
 //     xhr - the underlying XMLHttpRequest object
-function httpReq(type, url, callback, params, headers, data, contentType, username, password, allowCache)
-{
+function httpReq(type, url, callback, params, headers, data, contentType, username, password, allowCache) {
 	var httpSuccess = function(xhr) {
 		try {
 			// IE error sometimes returns 1223 when it should be 204 so treat it as success, see #1450
@@ -97,7 +95,8 @@ function httpReq(type, url, callback, params, headers, data, contentType, userna
 	if(password)
 		options.password = password;
 	try {
-		if(window.Components && window.netscape && window.netscape.security && document.location.protocol.indexOf("http") == -1)
+		if(window.Components && window.netscape && window.netscape.security
+		   && document.location.protocol.indexOf("http") == -1)
 			window.netscape.security.PrivilegeManager.enablePrivilege("UniversalBrowserRead");
 	} catch (ex) {
 		//# showException(ex); // SUPPRESS MESSAGE DISPLAY

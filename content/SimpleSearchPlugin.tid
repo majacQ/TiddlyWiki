@@ -1,21 +1,22 @@
 created: 20110211112100000
 creator: psd
-modified: 20110211131000000
-modifier: blaine
+modified: 202212021636
+modifier: Yakov Litvin
 tags: systemConfig
 title: SimpleSearchPlugin
 type: text/x-tiddlywiki
 
 /***
-|''Name''|SimpleSearchPlugin|
-|''Description''|displays search results as a simple list of matching tiddlers|
-|''Authors''|FND|
-|''Version''|0.4.1|
-|''Status''|stable|
-|''Source''|http://devpad.tiddlyspot.com/#SimpleSearchPlugin|
-|''CodeRepository''|http://svn.tiddlywiki.org/Trunk/contributors/FND/plugins/SimpleSearchPlugin.js|
-|''License''|[[Creative Commons Attribution-ShareAlike 3.0 License|http://creativecommons.org/licenses/by-sa/3.0/]]|
-|''Keywords''|search|
+|Name            |SimpleSearchPlugin|
+|Description     |displays search results as a simple list of matching tiddlers|
+|Author          |Yakov Litvin|
+|Original Authors|FND|
+|Version         |0.4.2|
+|Status          |stable|
+|Source          |https://github.com/YakovL/TiddlyWiki_Extensions/blob/master/FND/SimpleSearchPlugin.js|
+|Original Source |http://devpad.tiddlyspot.com/#SimpleSearchPlugin|
+|License         |[[Creative Commons Attribution-ShareAlike 3.0 License|http://creativecommons.org/licenses/by-sa/3.0/]]|
+|Keywords        |search|
 !Revision History
 !!v0.2.0 (2008-08-18)
 * initial release
@@ -24,6 +25,8 @@ type: text/x-tiddlywiki
 * sorting by relevance (title matches before content matches)
 !!v0.4.0 (2008-08-26)
 * added tag matching
+!!v0.4.2 (2022-12-02, forked by Yakov Litvin)
+* added recalculating styles on ColorPalette change (including dark mode)
 !To Do
 * tag matching optional
 * animations for container creation and removal
@@ -124,6 +127,9 @@ config.shadowTiddlers.StyleSheetSimpleSearch = "/*{{{*/\n" +
 	"}\n" +
 	"/*}}}*/";
 store.addNotification("StyleSheetSimpleSearch", refreshStyles);
+store.addNotification("ColorPalette", function(smth, doc) {
+	refreshStyles("StyleSheetSimpleSearch", doc);
+});
 
 // override Story.search()
 Story.prototype.search = function(text, useCaseSensitive, useRegExp) {

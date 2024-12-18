@@ -15,20 +15,20 @@ var config = {
 // Hashmap of alternative parsers for the wikifier
 config.parsers = {};
 
-// Adaptors
 config.adaptors = {};
 config.defaultAdaptor = null;
 
-// Backstage tasks
+// defines the order of the backstage tasks
+config.backstageTasks = ["save", "importTask", "tweak", "upgrade", "plugins"];
+// map by names from config.backstageTasks, defines their content (see Lingo.js and Backstage.js)
 config.tasks = {};
+//# the two structures are not merged yet not to hurt backward compatibility
 
-// Annotations
 config.annotations = {};
 
 // Custom fields to be automatically added to new tiddlers
 config.defaultCustomFields = {};
 
-// Messages
 config.messages = {
 	messageClose: {},
 	dates: {},
@@ -37,31 +37,35 @@ config.messages = {
 
 // Options that can be set in the options panel and/or cookies
 config.options = {
-	chkRegExpSearch: false,
-	chkCaseSensitiveSearch: false,
-	chkIncrementalSearch: true,
 	chkAnimate: true,
-	chkSaveBackups: true,
 	chkAutoSave: false,
-	chkGenerateAnRssFeed: false,
-	chkSaveEmptyTemplate: false,
-	chkOpenInNewWindow: true,
-	chkToggleLinks: false,
-	chkHttpReadOnly: true,
-	chkForceMinorUpdate: false,
+	chkBackstage: false,
+	chkCaseSensitiveSearch: false,
 	chkConfirmDelete: true,
-	chkInsertTabs: false,
-	chkUsePreForStorage: true, // Whether to use <pre> format for storage
 	chkDisplayInstrumentation: false,
+	chkForceMinorUpdate: false,
+	chkGenerateAnRssFeed: false,
+	chkHttpReadOnly: true,
+	chkIncrementalSearch: true,
+	chkInsertTabs: false,
+	chkOpenInNewWindow: true,
+	chkPreventAsyncSaving: true,
+	chkRegExpSearch: false,
 	chkRemoveExtraMarkers: false, // #162
+	chkSaveBackups: true,
+	chkSaveEmptyTemplate: false,
+	chkSliderOptionsPanel: false,
+	chkToggleLinks: false,
+	chkUsePreForStorage: true, // Whether to use <pre> format for storage
 	txtBackupFolder: "",
 	txtEditorFocus: "text",
-	txtMainTab: "tabTimeline",
-	txtMoreTab: "moreTabAll",
-	txtMaxEditRows: "30",
 	txtFileSystemCharSet: "UTF-8",
-	txtTheme: ""
-	};
+	txtMainTab: "tabTimeline",
+	txtMaxEditRows: "30",
+	txtMoreTab: "moreTabAll",
+	txtTheme: "",
+	txtUpgradeCoreURI: ""
+};
 config.optionsDesc = {};
 
 //# config.optionSource["chkAnimate"] can be:
@@ -89,17 +93,13 @@ config.views = {
 	}
 };
 
-// Backstage tasks
-config.backstageTasks = ["save","importTask","tweak","upgrade","plugins"];
-
-// Extensions
 config.extensions = {};
 
 // Macros; each has a 'handler' member that is inserted later
 config.macros = {
 	today: {},
 	version: {},
-	search: {sizeTextbox: 15},
+	search: { sizeTextbox: 15 },
 	tiddler: {},
 	tag: {},
 	tags: {},
@@ -125,7 +125,7 @@ config.macros = {
 	tabs: {},
 	gradient: {},
 	message: {},
-	view: {defaultView: "text"},
+	view: { defaultView: "text" },
 	edit: {},
 	tagChooser: {},
 	toolbar: {},
@@ -145,27 +145,29 @@ config.commands = {
 	closeTiddler: {},
 	closeOthers: {},
 	editTiddler: {},
-	saveTiddler: {hideReadOnly: true},
+	saveTiddler: { hideReadOnly: true },
 	cancelTiddler: {},
-	deleteTiddler: {hideReadOnly: true},
+	deleteTiddler: { hideReadOnly: true },
 	permalink: {},
-	references: {type: "popup"},
-	jump: {type: "popup"},
-	syncing: {type: "popup"},
-	fields: {type: "popup"}
+	references: { type: "popup" },
+	jump: { type: "popup" },
+	syncing: { type: "popup" },
+	fields: { type: "popup" }
 };
 
 // Control of macro parameter evaluation
 config.evaluateMacroParameters = "all";
 
 // Basic regular expressions
+var isBadSafari = !((new RegExp("[\u0150\u0170]", "g")).test("\u0150")); //# see 52678d4 and #22  ..remove at all?
 config.textPrimitives = {
 	upperLetter: "[A-Z\u00c0-\u00de\u0150\u0170]",
 	lowerLetter: "[a-z0-9_\\-\u00df-\u00ff\u0151\u0171]",
 	anyLetter:   "[A-Za-z0-9_\\-\u00c0-\u00de\u00df-\u00ff\u0150\u0170\u0151\u0171]",
 	anyLetterStrict: "[A-Za-z0-9\u00c0-\u00de\u00df-\u00ff\u0150\u0170\u0151\u0171]"
 };
-if(!((new RegExp("[\u0150\u0170]","g")).test("\u0150"))) {
+// Moved navigator dependent code out of Config.js into a separate module. Helps with https://github.com/TiddlyWiki/tiddlywiki/issues/22
+if(isBadSafari) {
 	config.textPrimitives = {
 		upperLetter: "[A-Z\u00c0-\u00de]",
 		lowerLetter: "[a-z0-9_\\-\u00df-\u00ff]",
@@ -175,7 +177,8 @@ if(!((new RegExp("[\u0150\u0170]","g")).test("\u0150"))) {
 }
 config.textPrimitives.sliceSeparator = "::";
 config.textPrimitives.sectionSeparator = "##";
-config.textPrimitives.urlPattern = "(?:file|http|https|mailto|ftp|irc|news|data):[^\\s'\"]+(?:/|\\b|\\[|\\])"; // #132
+config.textPrimitives.urlPattern =
+	"(?:file|http|https|mailto|ftp|irc|news|data):[^\\s'\"]+(?:/|\\b|\\[|\\])"; // #132
 config.textPrimitives.unWikiLink = "~";
 config.textPrimitives.wikiLink = "(?:(?:" + config.textPrimitives.upperLetter + "+" +
 	config.textPrimitives.lowerLetter + "+" +
@@ -184,18 +187,21 @@ config.textPrimitives.wikiLink = "(?:(?:" + config.textPrimitives.upperLetter + 
 	config.textPrimitives.upperLetter + "{2,}" +
 	config.textPrimitives.lowerLetter + "+))";
 
-config.textPrimitives.cssLookahead = "(?:(" + config.textPrimitives.anyLetter + "+)\\(([^\\)\\|\\n]+)(?:\\):))|(?:(" + config.textPrimitives.anyLetter + "+):([^;\\|\\n]+);)";
-config.textPrimitives.cssLookaheadRegExp = new RegExp(config.textPrimitives.cssLookahead,"mg");
+config.textPrimitives.cssLookahead = "(?:(" + config.textPrimitives.anyLetter +
+	"+)\\(([^\\)\\|\\n]+)(?:\\):))|(?:(" + config.textPrimitives.anyLetter + "+):([^;\\|\\n]+);)";
+config.textPrimitives.cssLookaheadRegExp = new RegExp(config.textPrimitives.cssLookahead, "mg");
 
 config.textPrimitives.brackettedLink = "\\[\\[([^\\]]+)\\]\\]";
 config.textPrimitives.titledBrackettedLink = "\\[\\[([^\\[\\]\\|]+)\\|([^\\[\\]\\|]+)\\]\\]";
-config.textPrimitives.tiddlerForcedLinkRegExp = new RegExp("(?:" + config.textPrimitives.titledBrackettedLink + ")|(?:" +
+config.textPrimitives.tiddlerForcedLinkRegExp =
+	new RegExp("(?:" + config.textPrimitives.titledBrackettedLink + ")|(?:" +
 	config.textPrimitives.brackettedLink + ")|(?:" +
-	config.textPrimitives.urlPattern + ")","mg");
-config.textPrimitives.tiddlerAnyLinkRegExp = new RegExp("("+ config.textPrimitives.wikiLink + ")|(?:" +
+	config.textPrimitives.urlPattern + ")", "mg");
+config.textPrimitives.tiddlerAnyLinkRegExp =
+	new RegExp("(" + config.textPrimitives.wikiLink + ")|(?:" +
 	config.textPrimitives.titledBrackettedLink + ")|(?:" +
 	config.textPrimitives.brackettedLink + ")|(?:" +
-	config.textPrimitives.urlPattern + ")","mg");
+	config.textPrimitives.urlPattern + ")", "mg");
 
 config.glyphs = {
 	currBrowser: null,
@@ -222,7 +228,8 @@ config.shadowTiddlers = {
 	AdvancedOptions: '<<options>>',
 	PluginManager: '<<plugins>>',
 	SystemSettings: '',
-	ToolbarCommands: '|~ViewToolbar|closeTiddler closeOthers +editTiddler > fields permalink references jump|\n|~EditToolbar|+saveTiddler -cancelTiddler deleteTiddler|', // #160
+	ToolbarCommands: '|~ViewToolbar|closeTiddler closeOthers +editTiddler > fields permalink references jump|\n' +
+		'|~EditToolbar|+saveTiddler -cancelTiddler deleteTiddler|', // #160
 	WindowTitle: '<<tiddler SiteTitle>> - <<tiddler SiteSubtitle>>'
 };
 

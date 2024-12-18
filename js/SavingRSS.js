@@ -2,28 +2,28 @@
 //-- RSS Saving
 //--
 
-function saveRss(localPath)
-{
+function saveRss(localPath, callback) {
 	var rssPath = localPath.substr(0, localPath.lastIndexOf(".")) + ".xml";
-	if(saveFile(rssPath, generateRss()))
-		displayMessage(config.messages.rssSaved, "file://" + rssPath);
-	else
-		alert(config.messages.rssFailed);
+
+	tw.io.saveFile(rssPath, generateRss(), callback || function(result, details) {
+		if(result)
+			displayMessage(config.messages.rssSaved, "file://" + rssPath);
+		else
+			alert(config.messages.rssFailed);
+	});
 }
 
-tiddlerToRssItem = function(tiddler, uri)
-{
+function tiddlerToRssItem(tiddler, uri) {
 	var s = "<title" + ">" + tiddler.title.htmlEncode() + "</title" + ">\n";
 	s += "<description>" + wikifyStatic(tiddler.text, null, tiddler).htmlEncode() + "</description>\n";
 	for(var i = 0; i < tiddler.tags.length; i++)
 		s += "<category>" + tiddler.tags[i] + "</category>\n";
 	s += "<link>" + uri + "#" + encodeURIComponent(String.encodeTiddlyLink(tiddler.title)) + "</link>\n";
-	s +="<pubDate>" + tiddler.modified.toGMTString() + "</pubDate>\n";
+	s += "<pubDate>" + tiddler.modified.toGMTString() + "</pubDate>\n";
 	return s;
-};
+}
 
-function generateRss()
-{
+function generateRss() {
 	var s = [];
 	var d = new Date();
 	var u = store.getTiddlerText("SiteUrl");
@@ -31,10 +31,11 @@ function generateRss()
 	s.push("<" + "?xml version=\"1.0\"?" + ">");
 	s.push("<rss version=\"2.0\">");
 	s.push("<channel>");
-	s.push("<title" + ">" + wikifyPlainText(store.getTiddlerText("SiteTitle", ""), null, tiddler).htmlEncode() + "</title" + ">");
-	if(u)
-		s.push("<link>" + u.htmlEncode() + "</link>");
-	s.push("<description>" + wikifyPlainText(store.getTiddlerText("SiteSubtitle", ""), null, tiddler).htmlEncode() + "</description>");
+	s.push("<title" + ">" + wikifyPlainText(store.getTiddlerText("SiteTitle", ""),
+		null, tiddler).htmlEncode() + "</title" + ">");
+	if(u) s.push("<link>" + u.htmlEncode() + "</link>");
+	s.push("<description>" + wikifyPlainText(store.getTiddlerText("SiteSubtitle", ""),
+		null, tiddler).htmlEncode() + "</description>");
 	s.push("<language>" + config.locale + "</language>");
 	s.push("<copyright>Copyright " + d.getFullYear() + " " + config.options.txtUserName.htmlEncode() + "</copyright>");
 	s.push("<pubDate>" + d.toGMTString() + "</pubDate>");

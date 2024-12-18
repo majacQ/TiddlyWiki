@@ -4,44 +4,46 @@
 
 // Strings in "double quotes" should be translated; strings in 'single quotes' should be left alone
 
-merge(config.options,{
+merge(config.options, {
 	txtUserName: "YourName"
 });
 
-merge(config.tasks,{
-	save: {text: "save", tooltip: "Save your changes to this TiddlyWiki"},
-	importTask: {text: "import", tooltip: "Import tiddlers and plugins from other TiddlyWiki files and servers", content: '<<importTiddlers>>'},
-	tweak: {text: "tweak", tooltip: "Tweak the appearance and behaviour of TiddlyWiki", content: '<<options>>'},
-	upgrade: {text: "upgrade", tooltip: "Upgrade TiddlyWiki core code", content: '<<upgrade>>'},
-	plugins: {text: "plugins", tooltip: "Manage installed plugins", content: '<<plugins>>'}
+merge(config.tasks, {
+	save: { text: "save", tooltip: "Save your changes to this TiddlyWiki" },
+	importTask: { text: "import", tooltip: "Import tiddlers and plugins " +
+		"from other TiddlyWiki files and servers", content: '<<importTiddlers>>' },
+	tweak: { text: "tweak", tooltip: "Tweak the appearance and behaviour of TiddlyWiki", content: '<<options>>' },
+	upgrade: { text: "upgrade", tooltip: "Upgrade TiddlyWiki core", content: '<<upgrade>>' },
+	plugins: { text: "plugins", tooltip: "Manage installed plugins", content: '<<plugins>>' }
 });
 
 // Options that can be set in the options panel and/or cookies
-merge(config.optionsDesc,{
-	txtUserName: "Username for signing your edits",
-	chkRegExpSearch: "Enable regular expressions for searches",
-	chkCaseSensitiveSearch: "Case-sensitive searching",
-	chkIncrementalSearch: "Incremental key-by-key searching",
+merge(config.optionsDesc, {
 	chkAnimate: "Enable animations",
-	chkSaveBackups: "Keep backup file when saving changes",
 	chkAutoSave: "Automatically save changes",
-	chkGenerateAnRssFeed: "Generate an RSS feed when saving changes",
-	chkSaveEmptyTemplate: "Generate an empty template when saving changes",
-	chkOpenInNewWindow: "Open external links in a new window",
-	chkToggleLinks: "Clicking on links to open tiddlers causes them to close",
-	chkHttpReadOnly: "Hide editing features when viewed over HTTP",
-	chkForceMinorUpdate: "Don't update modifier username and date when editing tiddlers",
+	chkCaseSensitiveSearch: "Case-sensitive searching",
 	chkConfirmDelete: "Require confirmation before deleting tiddlers",
+	chkIncrementalSearch: "Incremental key-by-key searching",
 	chkInsertTabs: "Use the tab key to insert tab characters instead of moving between fields",
-	chkRemoveExtraMarkers: "Replace unused transclusion markers with blanks", // #162
+	chkForceMinorUpdate: "Don't update modifier username and date when editing tiddlers",
+	chkGenerateAnRssFeed: "Generate an RSS feed when saving changes",
+	chkHttpReadOnly: "Hide editing features when viewed over HTTP",
+	chkOpenInNewWindow: "Open external links in a new window",
+	chkPreventAsyncSaving: "Disable attempting async saving (may be needed by old plugins)",
+	chkRegExpSearch: "Enable regular expressions for searches",
+	chkSaveBackups: "Keep backup file when saving changes",
+	chkSaveEmptyTemplate: "Generate an empty template when saving changes",
+	chkToggleLinks: "Clicking on links to open tiddlers causes them to close",
 	txtBackupFolder: "Name of folder to use for backups",
-	txtMaxEditRows: "Maximum number of rows in edit boxes",
-	txtTheme: "Name of the theme to use",
 	txtFileSystemCharSet: "Default character set for saving changes (Firefox/Mozilla only)",
-	txtUpgradeCoreURI: "Custom URI to download TiddlyWiki core from (when upgrading)"
+	txtMaxEditRows: "Maximum number of rows in edit boxes",
+	chkRemoveExtraMarkers: "Replace unused transclusion markers with blanks", // #162
+	txtTheme: "Name of the theme to use",
+	txtUpgradeCoreURI: "Custom URI to download TiddlyWiki core from (when upgrading)",
+	txtUserName: "Username for signing your edits"
 });
 
-merge(config.messages,{
+merge(config.messages, {
 	customConfigError: "Problems were encountered loading plugins. See PluginManager for details",
 	pluginError: "Error: %0",
 	pluginDisabled: "Not executed because disabled via 'systemConfigDisable' tag",
@@ -86,17 +88,17 @@ merge(config.messages,{
 	invalidCookie: "Invalid cookie '%0'"
 });
 
-merge(config.messages.messageClose,{
+merge(config.messages.messageClose, {
 	text: "close",
 	tooltip: "close this message area"
 });
 
 config.messages.backstage = {
-	open: {text: "backstage", tooltip: "Open the backstage area to perform authoring and editing tasks"},
-	close: {text: "close", tooltip: "Close the backstage area"},
+	open: { text: "backstage", tooltip: "Open the backstage area to perform authoring and editing tasks" },
+	close: { text: "close", tooltip: "Close the backstage area" },
 	prompt: "backstage: ",
 	decal: {
-		edit: {text: "edit", tooltip: "Edit the tiddler '%0'"}
+		edit: { text: "edit", tooltip: "Edit the tiddler '%0'" }
 	}
 };
 
@@ -105,21 +107,24 @@ config.messages.listView = {
 	previewUnavailable: "(preview not available)"
 };
 
-config.messages.dates.months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November","December"];
+config.messages.dates.months = ["January", "February", "March", "April", "May", "June",
+	"July", "August", "September", "October", "November", "December"];
 config.messages.dates.days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 config.messages.dates.shortMonths = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 config.messages.dates.shortDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 // suffixes for dates, eg "1st","2nd","3rd"..."30th","31st"
-config.messages.dates.daySuffixes = ["st","nd","rd","th","th","th","th","th","th","th",
-		"th","th","th","th","th","th","th","th","th","th",
-		"st","nd","rd","th","th","th","th","th","th","th",
-		"st"];
+config.messages.dates.daySuffixes = [
+	"st", "nd", "rd", "th", "th", "th", "th", "th", "th", "th",
+	"th", "th", "th", "th", "th", "th", "th", "th", "th", "th",
+	"st", "nd", "rd", "th", "th", "th", "th", "th", "th", "th",
+	"st"
+];
 config.messages.dates.am = "am";
 config.messages.dates.pm = "pm";
 
-merge(config.messages.tiddlerPopup,{});
+merge(config.messages.tiddlerPopup, {});
 
-merge(config.views.wikified.tag,{
+merge(config.views.wikified.tag, {
 	labelNoTags: "no tags",
 	labelTags: "tags: ",
 	openTag: "Open tag '%0'",
@@ -129,7 +134,7 @@ merge(config.views.wikified.tag,{
 	popupNone: "No other tiddlers tagged with '%0'"
 });
 
-merge(config.views.wikified,{
+merge(config.views.wikified, {
 	defaultText: "The tiddler '%0' doesn't yet exist. Double-click to create it",
 	defaultModifier: "(missing)",
 	shadowModifier: "(built-in shadow tiddler)",
@@ -137,29 +142,28 @@ merge(config.views.wikified,{
 	createdPrompt: "created"
 });
 
-merge(config.views.editor,{
+merge(config.views.editor, {
 	tagPrompt: "Type tags separated with spaces, [[use double square brackets]] if necessary, or add existing",
 	defaultText: "Type the text for '%0'"
 });
 
-merge(config.views.editor.tagChooser,{
+merge(config.views.editor.tagChooser, {
 	text: "tags",
 	tooltip: "Choose existing tags to add to this tiddler",
 	popupNone: "There are no tags defined",
 	tagTooltip: "Add the tag '%0'"
 });
 
-merge(config.messages,{
-	sizeTemplates:
-	[
-		{unit: 1024*1024*1024, template: "%0\u00a0GB"},
-		{unit: 1024*1024, template: "%0\u00a0MB"},
-		{unit: 1024, template: "%0\u00a0KB"},
-		{unit: 1, template: "%0\u00a0B"}
+merge(config.messages, {
+	sizeTemplates: [
+		{ unit: 1024 * 1024 * 1024, template: "%0\u00a0GB" },
+		{ unit: 1024 * 1024, template: "%0\u00a0MB" },
+		{ unit: 1024, template: "%0\u00a0KB" },
+		{ unit: 1, template: "%0\u00a0B" }
 	]
 });
 
-merge(config.macros.search,{
+merge(config.macros.search, {
 	label: "search",
 	prompt: "Search this TiddlyWiki",
 	placeholder: "",
@@ -168,17 +172,17 @@ merge(config.macros.search,{
 	failureMsg: "No tiddlers found matching %0"
 });
 
-merge(config.macros.tagging,{
+merge(config.macros.tagging, {
 	label: "tagging: ",
 	labelNotTag: "not tagging",
 	tooltip: "List of tiddlers tagged with '%0'"
 });
 
-merge(config.macros.timeline,{
+merge(config.macros.timeline, {
 	dateFormat: "DD MMM YYYY"
 });
 
-merge(config.macros.allTags,{
+merge(config.macros.allTags, {
 	tooltip: "Show tiddlers tagged with '%0'",
 	noTags: "There are no tagged tiddlers"
 });
@@ -189,53 +193,54 @@ config.macros.list.orphans.prompt = "Tiddlers that are not linked to from any ot
 config.macros.list.shadowed.prompt = "Tiddlers shadowed with default contents";
 config.macros.list.touched.prompt = "Tiddlers that have been modified locally";
 
-merge(config.macros.closeAll,{
+merge(config.macros.closeAll, {
 	label: "close all",
 	prompt: "Close all displayed tiddlers (except any that are being edited)"
 });
 
-merge(config.macros.permaview,{
+merge(config.macros.permaview, {
 	label: "permaview",
 	prompt: "Link to an URL that retrieves all the currently displayed tiddlers"
 });
 
-merge(config.macros.saveChanges,{
+merge(config.macros.saveChanges, {
 	label: "save changes",
 	prompt: "Save all tiddlers to create a new TiddlyWiki",
 	accessKey: "S"
 });
 
-merge(config.macros.newTiddler,{
+merge(config.macros.newTiddler, {
 	label: "new tiddler",
 	prompt: "Create a new tiddler",
 	title: "New Tiddler",
 	accessKey: "N"
 });
 
-merge(config.macros.newJournal,{
+merge(config.macros.newJournal, {
 	label: "new journal",
 	prompt: "Create a new tiddler from the current date and time",
 	accessKey: "J"
 });
 
-merge(config.macros.options,{
+merge(config.macros.options, {
 	wizardTitle: "Tweak advanced options",
 	step1Title: "These options are saved in cookies in your browser",
-	step1Html: "<input type='hidden' name='markList'></input><br><input type='checkbox' checked='false' name='chkUnknown'>Show unknown options</input>",
+	step1Html: "<input type='hidden' name='markList'></input><br>" +
+		"<label><input type='checkbox' checked='false' name='chkUnknown'>Show unknown options</label>",
 	unknownDescription: "//(unknown)//",
 	listViewTemplate: {
 		columns: [
-			{name: 'Option', field: 'option', title: "Option", type: 'String'},
-			{name: 'Description', field: 'description', title: "Description", type: 'WikiText'},
-			{name: 'Name', field: 'name', title: "Name", type: 'String'}
+			{ name: 'Option', field: 'option', title: "Option", type: 'String' },
+			{ name: 'Description', field: 'description', title: "Description", type: 'WikiText' },
+			{ name: 'Name', field: 'name', title: "Name", type: 'String' }
 		],
 		rowClasses: [
-			{className: 'lowlight', field: 'lowlight'}
+			{ className: 'lowlight', field: 'lowlight' }
 		]
 	}
 });
 
-merge(config.macros.plugins,{
+merge(config.macros.plugins, {
 	wizardTitle: "Manage plugins",
 	step1Title: "Currently loaded plugins",
 	step1Html: "<input type='hidden' name='markList'></input>", // DO NOT TRANSLATE
@@ -248,42 +253,42 @@ merge(config.macros.plugins,{
 	deletePrompt: "Delete these tiddlers forever",
 	listViewTemplate: {
 		columns: [
-			{name: 'Selected', field: 'Selected', rowName: 'title', type: 'Selector'},
-			{name: 'Tiddler', field: 'tiddler', title: "Tiddler", type: 'Tiddler'},
-			{name: 'Description', field: 'Description', title: "Description", type: 'String'},
-			{name: 'Version', field: 'Version', title: "Version", type: 'String'},
-			{name: 'Size', field: 'size', tiddlerLink: 'size', title: "Size", type: 'Size'},
-			{name: 'Forced', field: 'forced', title: "Forced", tag: 'systemConfigForce', type: 'TagCheckbox'},
-			{name: 'Disabled', field: 'disabled', title: "Disabled", tag: 'systemConfigDisable', type: 'TagCheckbox'},
-			{name: 'Executed', field: 'executed', title: "Loaded", type: 'Boolean', trueText: "Yes", falseText: "No"},
-			{name: 'Startup Time', field: 'startupTime', title: "Startup Time", type: 'String'},
-			{name: 'Error', field: 'error', title: "Status", type: 'Boolean', trueText: "Error", falseText: "OK"},
-			{name: 'Log', field: 'log', title: "Log", type: 'StringList'}
+			{ name: 'Selected', field: 'Selected', rowName: 'title', type: 'Selector' },
+			{ name: 'Tiddler', field: 'tiddler', title: "Tiddler", type: 'Tiddler' },
+			{ name: 'Description', field: 'Description', title: "Description", type: 'String' },
+			{ name: 'Version', field: 'Version', title: "Version", type: 'String' },
+			{ name: 'Size', field: 'size', tiddlerLink: 'size', title: "Size", type: 'Size' },
+			{ name: 'Forced', field: 'forced', title: "Forced", tag: 'systemConfigForce', type: 'TagCheckbox' },
+			{ name: 'Disabled', field: 'disabled', title: "Disabled", tag: 'systemConfigDisable', type: 'TagCheckbox' },
+			{ name: 'Executed', field: 'executed', title: "Loaded", type: 'Boolean', trueText: "Yes", falseText: "No" },
+			{ name: 'Startup Time', field: 'startupTime', title: "Startup Time", type: 'String' },
+			{ name: 'Error', field: 'error', title: "Status", type: 'Boolean', trueText: "Error", falseText: "OK" },
+			{ name: 'Log', field: 'log', title: "Log", type: 'StringList' }
 		],
 		rowClasses: [
-			{className: 'error', field: 'error'},
-			{className: 'warning', field: 'warning'}
+			{ className: 'error', field: 'error' },
+			{ className: 'warning', field: 'warning' }
 		]
 	},
 	listViewTemplateReadOnly: {
 		columns: [
-			{name: 'Tiddler', field: 'tiddler', title: "Tiddler", type: 'Tiddler'},
-			{name: 'Description', field: 'Description', title: "Description", type: 'String'},
-			{name: 'Version', field: 'Version', title: "Version", type: 'String'},
-			{name: 'Size', field: 'size', tiddlerLink: 'size', title: "Size", type: 'Size'},
-			{name: 'Executed', field: 'executed', title: "Loaded", type: 'Boolean', trueText: "Yes", falseText: "No"},
-			{name: 'Startup Time', field: 'startupTime', title: "Startup Time", type: 'String'},
-			{name: 'Error', field: 'error', title: "Status", type: 'Boolean', trueText: "Error", falseText: "OK"},
-			{name: 'Log', field: 'log', title: "Log", type: 'StringList'}
+			{ name: 'Tiddler', field: 'tiddler', title: "Tiddler", type: 'Tiddler' },
+			{ name: 'Description', field: 'Description', title: "Description", type: 'String' },
+			{ name: 'Version', field: 'Version', title: "Version", type: 'String' },
+			{ name: 'Size', field: 'size', tiddlerLink: 'size', title: "Size", type: 'Size' },
+			{ name: 'Executed', field: 'executed', title: "Loaded", type: 'Boolean', trueText: "Yes", falseText: "No" },
+			{ name: 'Startup Time', field: 'startupTime', title: "Startup Time", type: 'String' },
+			{ name: 'Error', field: 'error', title: "Status", type: 'Boolean', trueText: "Error", falseText: "OK" },
+			{ name: 'Log', field: 'log', title: "Log", type: 'StringList' }
 		],
 		rowClasses: [
-			{className: 'error', field: 'error'},
-			{className: 'warning', field: 'warning'}
+			{ className: 'error', field: 'error' },
+			{ className: 'warning', field: 'warning' }
 		]
 	}
 });
 
-merge(config.macros.toolbar,{
+merge(config.macros.toolbar, {
 	moreLabel: "more",
 	morePrompt: "Show additional commands",
 	lessLabel: "less",
@@ -291,32 +296,40 @@ merge(config.macros.toolbar,{
 	separator: "|"
 });
 
-merge(config.macros.refreshDisplay,{
+merge(config.macros.refreshDisplay, {
 	label: "refresh",
 	prompt: "Redraw the entire TiddlyWiki display"
 });
 
-merge(config.macros.importTiddlers,{
+merge(config.macros.importTiddlers, {
 	readOnlyWarning: "You cannot import into a read-only TiddlyWiki file. Try opening it from a file:// URL",
 	wizardTitle: "Import tiddlers from another file or server",
 	step1Title: "Step 1: Locate the server or TiddlyWiki file",
-	step1Html: "Specify the type of the server: <select name='selTypes'><option value=''>Choose...</option></select><br>Enter the URL or pathname here: <input type='text' size=50 name='txtPath'><br>...or browse for a file: <input type='file' size=50 name='txtBrowse'><br><hr>...or select a pre-defined feed: <select name='selFeeds'><option value=''>Choose...</option></select>",
+	step1Html: "Specify the type of the server: <select name='selTypes'><option value=''>Choose...</option></select><br>" +
+		"Enter the URL or pathname here: <input type='text' size=50 name='txtPath'><br>" +
+		"...or browse for a file: <input type='file' size=50 name='txtBrowse'><br><hr>" +
+		"...or select a pre-defined feed: <select name='selFeeds'><option value=''>Choose...</option></select>",
 	openLabel: "open",
 	openPrompt: "Open the connection to this file or server",
 	statusOpenHost: "Opening the host",
 	statusGetWorkspaceList: "Getting the list of available workspaces",
 	step2Title: "Step 2: Choose the workspace",
-	step2Html: "Enter a workspace name: <input type='text' size=50 name='txtWorkspace'><br>...or select a workspace: <select name='selWorkspace'><option value=''>Choose...</option></select>",
+	step2Html: "Enter a workspace name: <input type='text' size=50 name='txtWorkspace'><br>...or select a workspace: " +
+		"<select name='selWorkspace'><option value=''>Choose...</option></select>",
 	cancelLabel: "cancel",
 	cancelPrompt: "Cancel this import",
 	statusOpenWorkspace: "Opening the workspace",
 	statusGetTiddlerList: "Getting the list of available tiddlers",
 	errorGettingTiddlerList: "Error getting list of tiddlers, click Cancel to try again",
 	errorGettingTiddlerListHttp404: "Error retrieving tiddlers from url, please ensure the url exists. Click Cancel to try again.",
-	errorGettingTiddlerListHttp: "Error retrieving tiddlers from url, please ensure this url exists and is <a href='http://enable-cors.org/'>CORS</a> enabled",
-	errorGettingTiddlerListFile: "Error retrieving tiddlers from local file, please make sure the file is in the same directory as your TiddlyWiki. Click Cancel to try again.",
+	errorGettingTiddlerListHttp: "Error retrieving tiddlers from url, please " +
+		"ensure this url exists and is <a href='http://enable-cors.org/'>CORS</a> enabled",
+	errorGettingTiddlerListFile: "Error retrieving tiddlers from local file, " +
+		"please make sure the file is in the same directory as your TiddlyWiki. Click Cancel to try again.",
 	step3Title: "Step 3: Choose the tiddlers to import",
-	step3Html: "<input type='hidden' name='markList'></input><br><input type='checkbox' checked='true' name='chkSync'>Keep these tiddlers linked to this server so that you can synchronise subsequent changes</input><br><input type='checkbox' name='chkSave'>Save the details of this server in a 'systemServer' tiddler called:</input> <input type='text' size=25 name='txtSaveTiddler'>",
+	step3Html: "<input type='hidden' name='markList'></input><br><input type='checkbox' checked='true' name='chkSync'>" +
+		"Keep these tiddlers linked to this server so that you can synchronise subsequent changes</input><br>" +
+		"<input type='checkbox' name='chkSave'>Save the details of this server in a 'systemServer' tiddler called:</input> <input type='text' size=25 name='txtSaveTiddler'>",
 	importLabel: "import",
 	importPrompt: "Import these tiddlers",
 	confirmOverwriteText: "Are you sure you want to overwrite these tiddlers:\n\n%0",
@@ -328,35 +341,48 @@ merge(config.macros.importTiddlers,{
 	statusDoneImport: "All tiddlers imported",
 	systemServerNamePattern: "%2 on %1",
 	systemServerNamePatternNoWorkspace: "%1",
-	confirmOverwriteSaveTiddler: "The tiddler '%0' already exists. Click 'OK' to overwrite it with the details of this server, or 'Cancel' to leave it unchanged",
-	serverSaveTemplate: "|''Type:''|%0|\n|''URL:''|%1|\n|''Workspace:''|%2|\n\nThis tiddler was automatically created to record the details of this server",
+	confirmOverwriteSaveTiddler: "The tiddler '%0' already exists. Click 'OK' " +
+		"to overwrite it with the details of this server, or 'Cancel' to leave it unchanged",
+	serverSaveTemplate: "|''Type:''|%0|\n|''URL:''|%1|\n|''Workspace:''|%2|\n\n" +
+		"This tiddler was automatically created to record the details of this server",
 	serverSaveModifier: "(System)",
 	listViewTemplate: {
 		columns: [
-			{name: 'Selected', field: 'Selected', rowName: 'title', type: 'Selector'},
-			{name: 'Tiddler', field: 'tiddler', title: "Tiddler", type: 'Tiddler'},
-			{name: 'Size', field: 'size', tiddlerLink: 'size', title: "Size", type: 'Size'},
-			{name: 'Tags', field: 'tags', title: "Tags", type: 'Tags'}
+			{ name: 'Selected', field: 'Selected', rowName: 'title', type: 'Selector' },
+			{ name: 'Tiddler', field: 'tiddler', title: "Tiddler", type: 'Tiddler' },
+			{ name: 'Size', field: 'size', tiddlerLink: 'size', title: "Size", type: 'Size' },
+			{ name: 'Tags', field: 'tags', title: "Tags", type: 'Tags' }
 		],
 		rowClasses: []
 	}
 });
 
-merge(config.macros.upgrade,{
-	wizardTitle: "Upgrade TiddlyWiki core code",
-	step1Title: "Update or repair this TiddlyWiki to the latest release",
-	step1Html: "You are about to upgrade to the latest release of the TiddlyWiki core code (from <a href='%0' class='externalLink' target='_blank'>%1</a>). Your content will be preserved across the upgrade.<br><br>Note that core upgrades have been known to interfere with older plugins. If you run into problems with the upgraded file, see <a href='http://www.tiddlywiki.org/wiki/CoreUpgrades' class='externalLink' target='_blank'>http://www.tiddlywiki.org/wiki/CoreUpgrades</a>",
+merge(config.macros.upgrade, {
+	wizardTitle: "Upgrade TiddlyWiki",
+	step1Title: "Update or repair TiddlyWiki core to the latest release",
+	step1Html: "You are about to upgrade TiddlyWiki core to the latest release " +
+		"(from <a href='%0' class='externalLink' target='_blank'>%1</a>). " +
+		"Your content will be preserved across the upgrade.<br><br>" +
+		"Note that core upgrades have been known to interfere with older plugins. " +
+		"If you run into problems with upgrading, read how to handle them " +
+		"<a href='%2' class='externalLink' target='_blank'>here</a>.",
 	errorCantUpgrade: "Unable to upgrade this TiddlyWiki. You can only perform upgrades on TiddlyWiki files stored locally",
 	errorNotSaved: "You must save changes before you can perform an upgrade",
 	step2Title: "Confirm the upgrade details",
 	step2Html_downgrade: "You are about to downgrade to TiddlyWiki version %0 from %1.<br><br>Downgrading to an earlier version of the core code is not recommended",
-	step2Html_restore: "This TiddlyWiki appears to be already using the latest version of the core code (%0).<br><br>You can continue to upgrade anyway to ensure that the core code hasn't been corrupted or damaged",
+	step2Html_restore: "This TiddlyWiki appears to be already using the latest version of the core code (%0).<br><br>" +
+		"You can continue to upgrade anyway to ensure that the core code hasn't been corrupted or damaged",
 	step2Html_upgrade: "You are about to upgrade to TiddlyWiki version %0 from %1",
 	upgradeLabel: "upgrade",
 	upgradePrompt: "Prepare for the upgrade process",
 	statusPreparingBackup: "Preparing backup",
 	statusSavingBackup: "Saving backup file",
 	errorSavingBackup: "There was a problem saving the backup file",
+	errorVerifyingBackup: "Failed to verify the backup was saved. " +
+		"This is either because it wasn't saved to the moment of the check or " +
+		"loading file doesn't work with your saver (and it is needed for " +
+		"the next step of upgrading). To upgrade your TiddlyWiki, you can use " +
+		"other methods listed at <a href='%0' class='externalLink' target='_blank'>%0</a>",
 	statusLoadingCore: "Loading core code",
 	errorLoadingCore: "Error loading the core code",
 	errorCoreFormat: "Error with the new core code",
@@ -370,31 +396,31 @@ merge(config.macros.upgrade,{
 	step3Html: "You have cancelled the upgrade process"
 });
 
-merge(config.macros.annotations,{});
+merge(config.macros.annotations, {});
 
-merge(config.commands.closeTiddler,{
+merge(config.commands.closeTiddler, {
 	text: "close",
 	tooltip: "Close this tiddler"
 });
 
-merge(config.commands.closeOthers,{
+merge(config.commands.closeOthers, {
 	text: "close others",
 	tooltip: "Close all other tiddlers"
 });
 
-merge(config.commands.editTiddler,{
+merge(config.commands.editTiddler, {
 	text: "edit",
 	tooltip: "Edit this tiddler",
 	readOnlyText: "view",
 	readOnlyTooltip: "View the source of this tiddler"
 });
 
-merge(config.commands.saveTiddler,{
+merge(config.commands.saveTiddler, {
 	text: "done",
 	tooltip: "Save changes to this tiddler"
 });
 
-merge(config.commands.cancelTiddler,{
+merge(config.commands.cancelTiddler, {
 	text: "cancel",
 	tooltip: "Undo changes to this tiddler",
 	warning: "Are you sure you want to abandon your changes to '%0'?",
@@ -402,54 +428,55 @@ merge(config.commands.cancelTiddler,{
 	readOnlyTooltip: "View this tiddler normally"
 });
 
-merge(config.commands.deleteTiddler,{
+merge(config.commands.deleteTiddler, {
 	text: "delete",
 	tooltip: "Delete this tiddler",
 	warning: "Are you sure you want to delete '%0'?"
 });
 
-merge(config.commands.permalink,{
+merge(config.commands.permalink, {
 	text: "permalink",
 	tooltip: "Permalink for this tiddler"
 });
 
-merge(config.commands.references,{
+merge(config.commands.references, {
 	text: "references",
 	tooltip: "Show tiddlers that link to this one",
 	popupNone: "No references"
 });
 
-merge(config.commands.jump,{
+merge(config.commands.jump, {
 	text: "jump",
 	tooltip: "Jump to another open tiddler"
 });
 
-merge(config.commands.fields,{
+merge(config.commands.fields, {
 	text: "fields",
 	tooltip: "Show the extended fields of this tiddler",
 	emptyText: "There are no extended fields for this tiddler",
 	listViewTemplate: {
 		columns: [
-			{name: 'Field', field: 'field', title: "Field", type: 'String'},
-			{name: 'Value', field: 'value', title: "Value", type: 'String'}
+			{ name: 'Field', field: 'field', title: "Field", type: 'String' },
+			{ name: 'Value', field: 'value', title: "Value", type: 'String' }
 		],
 		rowClasses: [],
 		buttons: []
 	}
 });
 
-merge(config.shadowTiddlers,{
+merge(config.shadowTiddlers, {
 	DefaultTiddlers: "[[GettingStarted]]",
 	MainMenu: "[[GettingStarted]]",
 	SiteTitle: "My TiddlyWiki",
 	SiteSubtitle: "a reusable non-linear personal web notebook",
 	SiteUrl: "",
-	SideBarOptions: '<<search>><<closeAll>><<permaview>><<newTiddler>><<newJournal "DD MMM YYYY" "journal">><<saveChanges>><<slider chkSliderOptionsPanel OptionsPanel "options \u00bb" "Change TiddlyWiki advanced options">>',
+	SideBarOptions: '<<search>><<closeAll>><<permaview>><<newTiddler>><<newJournal "DD MMM YYYY" "journal">>' +
+		'<<saveChanges>><<slider chkSliderOptionsPanel OptionsPanel "options \u00bb" "Change TiddlyWiki advanced options">>',
 	SideBarTabs: '<<tabs txtMainTab "Timeline" "Timeline" TabTimeline "All" "All tiddlers" TabAll "Tags" "All tags" TabTags "More" "More lists" TabMore>>',
 	TabMore: '<<tabs txtMoreTab "Missing" "Missing tiddlers" TabMoreMissing "Orphans" "Orphaned tiddlers" TabMoreOrphans "Shadowed" "Shadowed tiddlers" TabMoreShadowed>>'
 });
 
-merge(config.annotations,{
+merge(config.annotations, {
 	AdvancedOptions: "This shadow tiddler provides access to several advanced options",
 	ColorPalette: "These values in this shadow tiddler determine the colour scheme of the ~TiddlyWiki user interface",
 	DefaultTiddlers: "The tiddlers listed in this shadow tiddler will be automatically displayed when ~TiddlyWiki starts up",
@@ -469,9 +496,11 @@ merge(config.annotations,{
 	SiteSubtitle: "This shadow tiddler is used as the second part of the page title",
 	SiteTitle: "This shadow tiddler is used as the first part of the page title",
 	SiteUrl: "This shadow tiddler should be set to the full target URL for publication",
-	StyleSheetColors: "This shadow tiddler contains CSS definitions related to the color of page elements. ''DO NOT EDIT THIS TIDDLER'', instead make your changes in the StyleSheet shadow tiddler",
+	StyleSheetColors: "This shadow tiddler contains CSS definitions related to the color of page elements. " +
+		"''DO NOT EDIT THIS TIDDLER'', instead make your changes in the StyleSheet shadow tiddler",
 	StyleSheet: "This tiddler can contain custom CSS definitions",
-	StyleSheetLayout: "This shadow tiddler contains CSS definitions related to the layout of page elements. ''DO NOT EDIT THIS TIDDLER'', instead make your changes in the StyleSheet shadow tiddler",
+	StyleSheetLayout: "This shadow tiddler contains CSS definitions related to the layout of page elements. " +
+	"''DO NOT EDIT THIS TIDDLER'', instead make your changes in the StyleSheet shadow tiddler",
 	StyleSheetLocale: "This shadow tiddler contains CSS definitions related to the translation locale",
 	StyleSheetPrint: "This shadow tiddler contains CSS definitions for printing",
 	SystemSettings: "Options may be stored here using the slice notation (like {{{chkAutoSave: true}}} or {{{|txtUserName|The great inventor|}}})",

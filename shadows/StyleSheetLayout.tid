@@ -1,7 +1,7 @@
 title: StyleSheetLayout
 
 /*{{{*/
-body {font-size:.75em; font-family:arial,helvetica; margin:0; padding:0;}
+body { font-size:.75em; font-family:arial,helvetica,sans-serif; margin:0; padding:0; }
 
 * html .tiddler {height:1%;}
 
@@ -26,7 +26,7 @@ ol ol ol ol ol {list-style-type:lower-alpha;}
 ol ol ol ol ol ol {list-style-type:lower-roman;}
 ol ol ol ol ol ol ol {list-style-type:decimal;}
 
-.txtOptionInput {width:11em;}
+.txtOptionInput {width:11em; border-width: 1px; }
 
 #contentWrapper .chkOptionInput {border:0;}
 
@@ -52,8 +52,8 @@ a.tiddlyLinkNonExisting.shadow {font-weight:bold;}
 
 
 .header {position:relative;}
-.headerShadow {position:relative; padding:4.5em 0 1em 1em; left:-1px; top:-1px;}
-.headerForeground {position:absolute; padding:4.5em 0 1em 1em; left:0; top:0;}
+.headerShadow {position:relative; padding:3em 0 1em 1em; left:-1px; top:-1px;}
+.headerForeground {position:absolute; padding:3em 0 1em 1em; left:0; top:0;}
 
 .siteTitle {font-size:3em;}
 .siteSubtitle {font-size:1.2em;}
@@ -68,20 +68,25 @@ a.tiddlyLinkNonExisting.shadow {font-weight:bold;}
 #sidebarOptions .sliderPanel a {font-weight:bold; display:inline; padding:0;}
 #sidebarOptions .sliderPanel input {margin:0 0 0.3em 0;}
 #sidebarTabs .tabContents {width:15em; overflow:hidden;}
+#sidebarTabs li:not(:last-child) { margin-bottom: 0.3em; }
+#sidebarTabs ul:not(:last-child) { margin-bottom: 0.5em; }
 
 .wizard { padding:0.1em 2em 0; }
 .wizard__title    { font-size:2em; }
 .wizard__subtitle { font-size:1.2em; }
 .wizard__title, .wizard__subtitle { font-weight:bold; background:none; padding:0; margin:0.4em 0 0.2em; }
 .wizardStep { padding:1em; }
-.wizardFooter { padding:0.8em 0.4em 0.8em 0; }
-.wizardFooter .status { padding:0.2em 0.7em; margin-left:0.3em; }
+.wizardFooter { padding: 0.8em 0; }
+.wizardFooter .status { display: inline-block; line-height: 1.5; padding: 0.3em 1em; }
 .wizardFooter .button { margin:0.5em 0 0; font-size:1.2em; padding:0.2em 0.5em; }
 
 #messageArea { position:fixed; top:2em; right:0; margin:0.5em; padding:0.7em 1em; z-index:2000; }
 .messageToolbar { text-align:right; padding:0.2em 0; }
 .messageToolbar__button { text-decoration:underline; }
-.messageToolbar__icon { height: 1em; width: 1em; } /* width for IE */
+.messageToolbar__button_withIcon { display: inline-block; }
+.tw-icon { height: 1em; width: 1em; } /* width for IE */
+.tw-icon line { stroke-width: 1; stroke-linecap: round; }
+.messageArea__text:not(:last-child) { margin-bottom: 0.3em; }
 .messageArea__text a { text-decoration:underline; }
 
 .popup {position:absolute; z-index:300; font-size:.9em; padding:0.3em 0; list-style:none; margin:0;}
@@ -95,7 +100,7 @@ a.tiddlyLinkNonExisting.shadow {font-weight:bold;}
 .popupTiddler {position: absolute; z-index:300; padding:1em; margin:0;}
 
 .tabset {padding:1em 0 0 0.5em;}
-.tab {margin:0 0 0 0.25em; padding:2px;}
+.tab {display: inline-block; white-space: nowrap; position: relative; bottom: -0.7px; margin: 0 0.25em 0 0; padding:0.2em;}
 .tabContents {padding:0.5em;}
 .tabContents ul, .tabContents ol {margin:0; padding:0;}
 .txtMainTab .tabContents li {list-style:none;}
@@ -108,14 +113,13 @@ a.tiddlyLinkNonExisting.shadow {font-weight:bold;}
 
 .toolbar {text-align:right; font-size:.9em;}
 
-.tiddler {padding:1em 1em 0;}
+.tiddler { padding: 1em; }
 
-.missing .viewer,.missing .title {font-style:italic;}
+.title { font-size: 1.6em; font-weight: bold; }
+.subtitle { font-size: 1.1em; }
 
-.title {font-size:1.6em; font-weight:bold;}
-
-.missing .subtitle {display:none;}
-.subtitle {font-size:1.1em;}
+.missing .viewer, .missing .title { font-style: italic; }
+.missing .subtitle { display: none; }
 
 .tiddler .button {padding:0.2em 0.4em;}
 
@@ -124,6 +128,7 @@ a.tiddlyLinkNonExisting.shadow {font-weight:bold;}
 .tagged {margin:0.5em; float:right;}
 .tagging, .tagged {font-size:0.9em; padding:0.25em;}
 .tagging ul, .tagged ul {list-style:none; margin:0.25em; padding:0;}
+.tagged li, .tagging li { margin: 0.3em 0; }
 .tagClear {clear:both;}
 
 .footer {font-size:.9em;}
@@ -136,10 +141,12 @@ a.tiddlyLinkNonExisting.shadow {font-weight:bold;}
 .viewer blockquote {line-height:1.5em; padding-left:0.8em;margin-left:2.5em;}
 .viewer ul, .viewer ol {margin-left:0.5em; padding-left:1.5em;}
 
-.viewer table, table.twtable {border-collapse:collapse; margin:0.8em 1.0em;}
-.viewer th, .viewer td, .viewer tr,.viewer caption,.twtable th, .twtable td, .twtable tr,.twtable caption {padding:3px;}
-table.listView {font-size:0.85em; margin:0.8em 1.0em;}
-table.listView th, table.listView td, table.listView tr {padding:0 3px 0 3px;}
+.viewer table, table.twtable { border-collapse: collapse; margin: 0.8em 0; }
+.viewer th, .viewer td, .viewer tr, .viewer caption, .twtable th, .twtable td, .twtable tr, .twtable caption { padding: 0.2em 0.4em; }
+.twtable caption { font-size: 0.9em; }
+table.listView { margin: 0.8em 1.0em; }
+table.listView th, table.listView td, table.listView tr { text-align: left; }
+.listView > thead { position: sticky; top: 0; }
 
 * html .viewer pre {width:99%; padding:0 0 1em 0;}
 .viewer pre {padding:0.5em; overflow:auto;}
@@ -147,7 +154,7 @@ pre, code { font-family: monospace, monospace; font-size: 1em; }
 .viewer pre, .viewer code { line-height: 1.4em; }
 
 .editor {font-size:1.1em; line-height:1.4em;}
-.editor input, .editor textarea {display:block; width:100%; box-sizing: border-box; font:inherit;}
+.editor input, .editor textarea { display: block; width: 100%; box-sizing: border-box; font: inherit; padding: 0.1em 0.4em; }
 .editorFooter {padding:0.25em 0; font-size:.9em;}
 .editorFooter .button {padding-top:0; padding-bottom:0;}
 
@@ -162,9 +169,9 @@ pre, code { font-family: monospace, monospace; font-size: 1em; }
 #backstageToolbar {position:relative;}
 #backstageArea a {font-weight:bold; margin-left:0.5em; padding:0.3em 0.5em;}
 #backstageButton {display:none; position:absolute; z-index:175; top:0; right:0;}
-#backstageButton a {padding:0.1em 0.4em; margin:0.1em;}
+#backstageButton a {padding: 0.3em 0.5em; display: inline-block;}
 #backstage {position:relative; width:100%; z-index:50;}
-#backstagePanel { display:none; z-index:100; position:absolute; width:90%; margin-left:3em; }
+#backstagePanel { display:none; z-index:100; position:absolute; width:90%; margin:0 5%; }
 .backstagePanelFooter {padding-top:0.2em; float:right;}
 .backstagePanelFooter a {padding:0.2em 0.4em;}
 #backstageCloak {display:none; z-index:20; position:absolute; width:100%; height:100px;}

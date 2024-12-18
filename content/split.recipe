@@ -21,8 +21,6 @@ tiddler: CSS%20Formatting.tid
 
 tiddler: CamelCase.tid
 
-tiddler: Camino.tid
-
 tiddler: CancelTiddlerCommand.tid
 
 tiddler: CharacterEncoding.tid
@@ -37,13 +35,13 @@ tiddler: Code%20Formatting.tid
 
 tiddler: ColorPalette.tid
 
+tiddler: ColorPaletteDark.tid
+
 tiddler: ColorPalette%20shadows.tid
 
 tiddler: Community.tid
 
 tiddler: Configuration.tid
-
-tiddler: Configuration.SideBarTabs.tid
 
 tiddler: ContentsSlider.tid
 
@@ -54,6 +52,8 @@ tiddler: CustomMarkup.tid
 tiddler: CustomStyleSheet.tid
 
 tiddler: Customisation.tid
+
+tiddler: DarkModePlugin.tid
 
 tiddler: Date%20Formats.tid
 
@@ -110,6 +110,8 @@ tiddler: Examples.tid
 tiddler: Feedback.tid
 
 tiddler: Firefox.tid
+
+tiddler: Filters.tid
 
 tiddler: FlickrBadge.tid
 
@@ -383,8 +385,6 @@ tiddler: VisualTWServer.tid
 
 tiddler: WhatsNew.tid
 
-tiddler: Wii.tid
-
 tiddler: WikiOnAStick.tid
 
 tiddler: WikiTextContent.tid
@@ -402,10 +402,6 @@ tiddler: allTags%20macro.tid
 tiddler: anotherTiddlerToTransclude.tid
 
 tiddler: closeAll%20macro.tid
-
-tiddler: example.tid
-
-tiddler: favicon.ico.tid
 
 tiddler: list%20macro.tid
 
